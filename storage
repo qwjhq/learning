@@ -1,0 +1,51 @@
+阿里云
+以单块SSD共享块存储最大IOPS计算公式为例：起步1600 IOPS，每GiB增加40 IOPS，最高30000 IOPS。
+以单块SSD共享块存储最大吞吐量计算公式为例：起步100 MBps，每GiB增加0.5 MBps，上限为512 MBps的吞吐量。
+https://www.alibabacloud.com/help/zh/doc-detail/25382.htm?spm=a2c63.p38356.b99.30.56194dffgKpc0M
+
+腾讯云
+例如，单块高性能云硬盘存储容量为500GB。
+1500 + 500 × 8 = 5500 > 4500，则最大随机 IOPS 为4500。
+90 + 500 × 0.15 = 165 > 130，则最大吞吐量为130MB/s。
+https://cloud.tencent.com/document/product/362/2353
+
+阿里测试命令
+测试随机写IOPS
+fio -direct=1 -iodepth=128 -rw=randwrite -ioengine=libaio -bs=4k -size=1G -numjobs=1 -runtime=1000 -group_reporting -filename=iotest -name=Rand_Write_Testing
+
+测试随机读IOPS
+fio -direct=1 -iodepth=128 -rw=randread -ioengine=libaio -bs=4k -size=1G -numjobs=1 -runtime=1000 -group_reporting -filename=iotest -name=Rand_Read_Testing
+
+测试顺序写吞吐量
+fio -direct=1 -iodepth=64 -rw=write -ioengine=libaio -bs=1024k -size=1G -numjobs=1 -runtime=1000 -group_reporting -filename=iotest -name=Write_PPS_Testing
+
+测试顺序读吞吐量
+fio -direct=1 -iodepth=64 -rw=read -ioengine=libaio -bs=1024k -size=1G -numjobs=1 -runtime=1000 -group_reporting -filename=iotest -name=Read_PPS_Testing
+
+
+
+
+阿里腾讯云测试对比
+IOPS：每秒读写(I/O)操作的次数，数值越高越好。
+吞吐量：一般用MBPS，每秒传输的MB字节数来衡量（Throughput）。
+访问时延：访问时延，完成一个 I/O 请求所需的时间，（Latency）。
+根据 SNIA 发布的企业级SSD评测规范PTS（Solid State Storage Performance Test Specification Enterprise v1.1）进行 。
+
+SNIA 是存储网络行业协会(Storage Networking Industry Association，SNIA)的简称，这是一个由厂商和大学成立的行业组织，致力于开发和推广存储系统标准。
+
+除了 IOPS、Throughput 和 Latency 三项基础测试外，PTS 还包含了以下五种测试：
+
+Write Saturation (WSAT)：持续应用工作负载，测试性能随着时间如何变化。
+Demand Intensity Response Time Histograms (DIRTH)
+Cross Stimulus Recovery (XSR)
+Host Idle Recovery (HIR)：测试宿主机闲置时间对性能恢复的影响。
+Enterprise Composite Workload (ECW)
+SNIA 官方有提供测试服务，但是收费，而且也不适用于云存储设备。
+
+因此，笔者选择了一家云计算公司根据 PTS 规范实现的自动化测试库（代码地址：cloudharmony/block-storage），其中包含了 IOPS、TP、Latency、WSAT 和 HIR 五类测试，其他的没有实现。
+
+SSD 云盘的测试中没有 WSAT 和 HIR 两项，具体原因后面会提到。
+https://zhuanlan.zhihu.com/p/24242196
+
+华为对象存储测试工具
+https://github.com/huaweicloud-obs/obscmdbench
