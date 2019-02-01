@@ -1,0 +1,7 @@
+docker版本最低至少用到17.06
+系统至少用到7.4(打补丁）
+
+https://bugzilla.redhat.com/show_bug.cgi?id=1441737
+https://github.com/moby/moby/issues/34538
+
+最好是用最新稳定版本，跟上社区
