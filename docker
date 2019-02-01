@@ -5,3 +5,11 @@ https://bugzilla.redhat.com/show_bug.cgi?id=1441737
 https://github.com/moby/moby/issues/34538
 
 最好是用最新稳定版本，跟上社区
+
+
+docker graphdriver
+http://dockone.io/article/1765
+https://jpetazzo.github.io/assets/2015-07-01-deep-dive-into-docker-storage-drivers.html#33
+https://blog.jessfraz.com/post/the-brutally-honest-guide-to-docker-graphdrivers/
+https://developers.redhat.com/blog/2014/09/30/overview-storage-scalability-docker/
+https://integratedcode.us/2016/08/30/storage-drivers-in-docker-a-deep-dive/
