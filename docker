@@ -13,3 +13,15 @@ https://jpetazzo.github.io/assets/2015-07-01-deep-dive-into-docker-storage-drive
 https://blog.jessfraz.com/post/the-brutally-honest-guide-to-docker-graphdrivers/
 https://developers.redhat.com/blog/2014/09/30/overview-storage-scalability-docker/
 https://integratedcode.us/2016/08/30/storage-drivers-in-docker-a-deep-dive/
+
+20190213 go语言多线程不支持mnt namespace再次挂载
+   原因前提在3.10.0 kernel下systemd启动的docker服务设置选项MountFlags=slave为解决nginx及系统ntp等服务systemd启动时开启了privateTmp=true，共享问题  
+   https://stackoverflow.com/questions/25704661/calling-setns-from-go-returns-einval-for-mnt-namespace
+   docker 在CentOS Linux release 7.3.1611 (Core) 3.10.0-514.6.2.el7.x86_64 环境时
+   升级kernel 支持fs.may_detach_mounts = 1  v4.13+ kernels   docker 17.12版本开始支持overlay2
+
+20190214 runc暂不支持cgroup v2
+   Our current cgroup parsing logic assumes cgroup v1 mounts
+   so we should ignore cgroup2 mounts for now
+   https://github.com/opencontainers/runc/pull/1266
+   cgroup v2 vs cgroup v1 https://chrisdown.name/talks/cgroupv2/cgroupv2-fosdem.pdf
