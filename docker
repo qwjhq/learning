@@ -25,3 +25,21 @@ https://integratedcode.us/2016/08/30/storage-drivers-in-docker-a-deep-dive/
    so we should ignore cgroup2 mounts for now
    https://github.com/opencontainers/runc/pull/1266
    cgroup v2 vs cgroup v1 https://chrisdown.name/talks/cgroupv2/cgroupv2-fosdem.pdf
+
+磁盘IO数据
+https://blog.51cto.com/wushank/1708168
+顺序读
+SSD其速度可以达到404MB/S，IOPS达到103K/S
+SAS其速度可以达到190MB/S，IOPS达到41K/S
+SATA其速度可以达到124MB/S，IOPS达到31K/S
+
+difference between du and df 
+1.The file system allocates some of the disk blocks in the file system to record its data. This data is referred to as meta data. Meta data is not visible to most user-level programs. Examples of meta data are inodes, disk maps, indirect blocks, and super blocks.
+du is an example of a user-level program that is not aware of file system meta data, while df looks at the file system disk allocation maps and is aware of file system meta data. df obtains the true file system statistics, whereas du sees only a partial picture. For example, an empty 4MB JFS file system created with frag=4096 and nbpi=4096 has the following meta data allocated:
+  
+2.Another example that contributes to a difference between du and df is the following:
+If someone is running an application with a file open in a directory and the open file is removed, the du output reflects a reduced size for this directory. However, df does not show a reduced size because all blocks in the file system remain allocated until the application that has the file open closes the file. After the file closure, df shows reduced usage for the file system.
+3、mount
+
+https://www.linuxquestions.org/questions/slackware-14/huge-difference-between-du-and-df-4175589814/
+https://www-01.ibm.com/support/docview.wss?uid=isg3T1000401
