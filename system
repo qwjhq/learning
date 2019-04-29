@@ -2,3 +2,5 @@ io wait
 while true; do ps -eo state,pid,cmd,ppid,pmem,command | grep "^D"; echo "----"; sleep 10; done 
 http://bencane.com/2012/08/06/troubleshooting-high-io-wait-in-linux/
 http://www.10tiao.com/html/415/201610/2649836694/5.html
+ss
+https://medium.com/@ATheCoder/how-to-setup-shadowsocks-client-on-centos-f7f104a54363
