@@ -43,3 +43,17 @@ If someone is running an application with a file open in a directory and the ope
 
 https://www.linuxquestions.org/questions/slackware-14/huge-difference-between-du-and-df-4175589814/
 https://www-01.ibm.com/support/docview.wss?uid=isg3T1000401
+
+unregister_netdevice: waiting for lo to become free. Usage count = 3
+Observed kernel versions with this issue
+
+RHEL7 3.10.0-862
+4.15.0
+4.20.0
+Kernel versions claimed not triggering this issue
+
+RHEL7 3.10.0-957.10.1
+4.19.12
+4.17.0
+4.17.11
+https://github.com/moby/moby/issues/5618#issuecomment-407751991
